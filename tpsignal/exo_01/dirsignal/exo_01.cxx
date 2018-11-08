@@ -30,21 +30,39 @@ int main(int argc, char * argv [])
 {
   try {
 
-	if (1 != argc) {
+	/*
+	cout << argv [1][0] << endl;
+	system ("sleep 10");
+	*/
+	if (2 != argc) {
 		cerr << "Ne rentrer qu'un seul parametre !" << endl;
 	}
-	if (!argv [1].isChar ()) {
+	if (!isalpha (argv [1][0])) {
 		cerr << "Ne rentrer qu'un caractere !" << endl;
 	}
-	if (argv [1] != 'P' || avrg [1] != 'I' || argv [1] != 'D') {
+	if (argv [1][0] != 'P' && argv [1][0] != 'I' && argv [1][0] != 'D') {
 		cerr << "Le caractere ne peut être que P, I ou D !" << endl;
 	}
 
-	for (unsigned i = 1; i != 31; ++i){
-		switch (argv [1]) {
-
+	for (unsigned numSig = 1; numSig != 31; ++numSig){
+		if (numSig != SIGKILL && numSig != SIGSTOP && numSig != SIGCONT) {
+			switch (argv [1][0]) {
+				case 'P':
+					Signal (numSig, Derout);
+					break;
+				case 'I':
+					Signal (numSig, SIG_IGN);
+					break;
+				case 'D':
+					Signal (numSig, SIG_DFL);
+					break;
+				default:
+					cerr << "wlh c'est chaud" << endl;
+			}
 		}
 	}
+
+	while (true) {}
 
 ///code
     return 0;

@@ -15,7 +15,7 @@
 #include <sys/types.h>    // ssize_t                                                    
 #include <sys/stat.h>     // struct stat, stat(), fstat()
 #include <signal.h>       // struct sigaction, sigset_t
-
+#include <unistd.h>
 
 #include "string.h"
 

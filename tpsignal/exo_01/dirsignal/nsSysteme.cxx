@@ -13,7 +13,7 @@
 #include <sys/types.h>   // mode_t
 #include <cstddef>       // size_t
 #include <stdlib.h>     //system()
-
+#include <unistd.h>
 #include "CExc.h"
 #include "nsSysteme.h"
 
@@ -92,10 +92,11 @@ void nsFctShell::Destroy (const char * const File) {
 
 }  //  Destroy()
 
-sighandler_t Signal  (int numsig, sighandler_t Traitant) {
-	struct sigaction action.sa_handler = Traitant;
+sighandler_t nsSysteme::Signal  (int numsig, sighandler_t Traitant) throw (CExc) {
+	struct sigaction action;
+	action.sa_handler = Traitant;
 	action.sa_flags = 0;
-	sigempty set (action);
-	Sigaction (numsig, action, NULL);
-	return acton.sa_handler;
+	sigemptyset (&action.sa_mask);
+	nsSysteme::Sigaction (numsig, &action, nullptr);
+	return action.sa_handler;
 }
